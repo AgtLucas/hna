@@ -1,0 +1,12 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+*.DS_Store
+
+# Configs...
+*hibernate.cfg.xml
+*src/hibernate.cfg.xml
