@@ -6,10 +6,20 @@
 
 package gov.nsa.mi6;
 
+import java.util.List;
+
 /**
  *
  * @author AgtLucas
  */
-public interface IUserDAO {
+public interface IUserDAO extends IDAO {
+    
+    void addRole(User u, Role r) throws Exception;
+    
+    void removeRole(User u, Role r) throws Exception;
+    
+    boolean hasRole(User u, Role r) throws Exception;
+    
+    List findRoles(User u);
     
 }
