@@ -7,11 +7,14 @@
 package gov.nsa.mi6;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -39,8 +42,23 @@ public class Role implements Serializable {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
     
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+    private Set<User> user;
+    
     public Role() {
         setId(0);
+    }
+    
+    public Set<User> getUser() {
+        return this.user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
+    }
+
+    public void setID(int valor) {
+        this.id = valor;
     }
 
     public int getId() {
