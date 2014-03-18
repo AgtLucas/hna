@@ -7,13 +7,16 @@
 package gov.nsa.mi6;
 
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 /**
  *
  * @author AgtLucas
  */
-public class UserDAO extends AbstractDAO {
+public class UserDAO extends AbstractDAO implements IUserDAO {
 
     @Override
     protected String getNamedQueryToFindAll() {
@@ -58,14 +61,15 @@ public class UserDAO extends AbstractDAO {
         return "user.has.role";
     }
     
+    @Override
     public void addRole(User user, Role role) {
         try {
             if (hasRole(user, role) == true) {
-                User user2 = (User) find(String.valueOf(user.getId()));
-                Set roles = user2.getRole();
+                User u = (User) find(String.valueOf(user.getId()));
+                Set roles = u.getRole();
                 roles.add(role);
-                user2.setRole((Set) roles);
-                update(user2);
+                u.setRole((Set) roles);
+                update(u);
             }
 
         } catch (Exception ex) {
@@ -74,24 +78,55 @@ public class UserDAO extends AbstractDAO {
 
     }
     
+    @Override
     public boolean hasRole(User user, Role role) throws Exception {
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            Query q = session.getNamedQuery(getNameQueryToHasRole());
-            q.setInteger("roleid", role.getID());
-            q.setInteger("userid", user.getId());
-
-            if (q.uniqueResult() != null) {
-                return false;
-            } else {
-                return true;
-            }
+            User u = (User) find(String.valueOf(user.getId()));
+            Set roles = u.getRole();
+            return roles.contains(role);
         } catch (HibernateException e) {
             throw new Exception(e.getCause().getMessage());
         } finally {
             releaseSession(session);
         }
 
+    }
+
+    @Override
+    public Object create(Object o) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Object o) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object findById(Integer theId) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object findByName(String theName) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeRole(User u, Role r) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Set findRole(User o) throws Exception {
+        try {
+            User u = (User) find(String.valueOf(o.getId()));
+            return u.getRole();
+        } catch (HibernateException e) {
+            throw new Exception(e.getCause().getLocalizedMessage());
+        } finally {
+            releaseSession(session);
+        }
     }
     
 }
