@@ -16,15 +16,13 @@ public interface IDAO {
     
     Long countAll() throws Exception;
 
-    Object create(Object o) throws Exception;
+//    Object create(Object o) throws Exception;
 
-    void delete(Object o) throws Exception;
+//    void delete(Object o) throws Exception;
 
     List findAll() throws Exception;
 
     Object findById(Integer theId) throws Exception;
-
-    Object findByName(String theName) throws Exception;
 
     Object getNewInstance();
 
