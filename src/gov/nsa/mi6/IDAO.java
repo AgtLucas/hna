@@ -32,6 +32,12 @@ public interface IDAO {
 
     void removeAll() throws Exception;
 
-    void save(Object o) throws Exception;
+    Object save(Object o) throws Exception;
+    
+    void update(Object o) throws Exception;
+    
+    void remove(Object o) throws Exception;
+    
+    Object find(String id) throws Exception;
     
 }

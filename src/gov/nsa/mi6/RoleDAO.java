@@ -7,6 +7,7 @@
 package gov.nsa.mi6;
 
 import java.util.List;
+import java.util.Set;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
@@ -14,7 +15,7 @@ import org.hibernate.Query;
  *
  * @author AgtLucas
  */
-public class RoleDAO extends AbstractDAO {
+public class RoleDAO extends AbstractDAO implements IRoleDAO {
 
     @Override
     protected String getNamedQueryToFindAll() {
@@ -51,28 +52,42 @@ public class RoleDAO extends AbstractDAO {
         return new Role();
     }
     
-    public List findUser(Role o) throws Exception {
+
+    public Object find(String id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object create(Object o) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Object o) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object findById(Integer theId) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object findByName(String theName) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Set findUser(Role o) throws Exception {
+        
         try {
-            UserDAO user = new UserDAO();
-            
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            Query q = session.getNamedQuery(user.getNameQueryToFindUser());
-            q.setInteger("id", o.getId());
-            List lt = q.list();
-            session.getTransaction().commit();
-            return lt;
+            Role r = (Role) find(String.valueOf(o.getId()));
+            return r.getUser();
         } catch (HibernateException e) {
             throw new Exception(e.getCause().getLocalizedMessage());
         } finally {
             releaseSession(session);
         }
-
-    }
-
-    @Override
-    public Object find(String id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

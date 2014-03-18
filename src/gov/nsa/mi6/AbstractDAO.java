@@ -18,9 +18,10 @@ import org.hibernate.Session;
 public abstract class AbstractDAO implements IDAO {
     
     protected Session session;
-
+    
     @Override
-    public Object create(Object o) throws Exception {
+    public Object save(Object o) throws Exception {
+    
         try {
             session = obtainSession();
             session.beginTransaction();
@@ -35,9 +36,10 @@ public abstract class AbstractDAO implements IDAO {
             releaseSession(session);
         }
     }
-
+    
     @Override
-    public void save(Object o) throws Exception {
+    public void update(Object o) throws Exception {
+    
         try {
             session = obtainSession();
             session.beginTransaction();
@@ -51,9 +53,10 @@ public abstract class AbstractDAO implements IDAO {
             releaseSession(session);
         }
     }
+    
 
     @Override
-    public void delete(Object o) throws Exception {
+    public void remove(Object o) throws Exception {
         try {
             session = obtainSession();
             session.beginTransaction();
@@ -65,31 +68,16 @@ public abstract class AbstractDAO implements IDAO {
         } finally {
             releaseSession(session);
         }
+    
     }
 
     @Override
-    public Object findById(Integer theId) throws Exception {
-        try {
+    public Object find(String id) throws Exception {
+         try {
             session = HibernateUtil.getSessionFactory().openSession();
             //Query q = session.getNamedQuery("id.igual");
             Query q = session.getNamedQuery(getNamedQueryToFindById());
-            q.setString("id", theId.toString());
-            Object o = q.uniqueResult();
-            return o;
-        } catch (HibernateException e) {
-            throw new Exception(e.getCause().getMessage());
-        } finally {
-            releaseSession(session);
-        }
-    }
-
-    @Override
-    public Object findByName(String theName) throws Exception {
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            //Query q = session.getNamedQuery("name.igual");
-            Query q = session.getNamedQuery(getNamedQueryToFindByName());
-            q.setString("name", theName);
+            q.setString("id", id.toString());
             Object o = q.uniqueResult();
             return o;
         } catch (HibernateException e) {
@@ -115,7 +103,7 @@ public abstract class AbstractDAO implements IDAO {
             releaseSession(session);
         }
     }
-
+    
     @Override
     public List list(Integer firstResult, Integer maxResults) throws Exception {
         try {
@@ -164,9 +152,9 @@ public abstract class AbstractDAO implements IDAO {
             throw new Exception(e.getCause().getMessage());
         } finally {
             releaseSession(session);
-        }
+        }    
     }
-
+    
     protected Session obtainSession() {
         return HibernateUtil.getSessionFactory().getCurrentSession();
     }

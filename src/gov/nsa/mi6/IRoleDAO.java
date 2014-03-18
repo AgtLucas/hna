@@ -6,7 +6,7 @@
 
 package gov.nsa.mi6;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface IRoleDAO extends IDAO {
     
-    List<User> findUser(Role r) throws Exception;
+    Set findUser(Role o) throws Exception;
     
 }
