@@ -4,6 +4,7 @@ import gov.nsa.mi6.RoleDAO;
 import gov.nsa.mi6.User;
 import gov.nsa.mi6.UserDAO;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 /*
@@ -21,6 +22,31 @@ public class TestPersistence {
     public static void main(String ...args) {
         
         try {
+            
+            removeAllUsers();
+            removeAllUsers();
+            
+            User u = createUsers("Jason Bourne");
+            Role r = createRoles("Spy");
+            
+            Set role = new HashSet();
+            role.add(r);
+            
+            assigningRoleToUser(role, u);
+            
+            showAllUsers();
+            showAllRoles();
+            showAllUserRole(u);
+            
+            findUser(r);
+            
+            addNewRole(u, r);
+            
+            removeRole(r, u);
+            
+            hasRole(u, r);
+            
+            findRoles(u);
     
         } catch (Exception e) {
             System.out.println("The system has failed! Kick the chair! " + e.getMessage());
