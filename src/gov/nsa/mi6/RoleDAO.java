@@ -6,10 +6,8 @@
 
 package gov.nsa.mi6;
 
-import java.util.List;
 import java.util.Set;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 
 /**
  *
