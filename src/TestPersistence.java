@@ -3,6 +3,7 @@ import gov.nsa.mi6.Role;
 import gov.nsa.mi6.RoleDAO;
 import gov.nsa.mi6.User;
 import gov.nsa.mi6.UserDAO;
+import java.util.ArrayList;
 import java.util.Set;
 
 /*
@@ -68,6 +69,29 @@ public class TestPersistence {
     
     // Show all roles
     private static void showAllRoles() throws Exception {
+        
+        RoleDAO rd = new RoleDAO();
+        ArrayList roles = (ArrayList) rd.findAll();
+        Role r;
+        
+        for (int i = 0; i < roles.size(); i++) {
+            r = (Role) roles.get(i);
+            System.out.println(r);
+        }
+        
+    }
+    
+    // Show all users
+    private static void showAllUsers() throws Exception {
+        
+        UserDAO ud = new UserDAO();
+        ArrayList users = (ArrayList) ud.findAll();
+        User u;
+        
+        for (int i = 0; i < users.size(); i++) {
+            u = (User) users.get(i);
+            System.out.println(u);
+        }
         
     }
     
