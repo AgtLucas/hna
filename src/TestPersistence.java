@@ -57,7 +57,15 @@ public class TestPersistence {
         
     }
     
-    // assigning roles to user
+    // Add role
+    private static void addNewRole(User user, Role role) throws Exception {
+        System.out.println("Adding roles to users");
+        UserDAO ud = new UserDAO();
+        ud.addRole(user, role);
+    }
+    
+    
+    // Assigning roles to user
     private static void assigningRoleToUser(Set role, User user) throws Exception {
         
         UserDAO ud = new UserDAO();
