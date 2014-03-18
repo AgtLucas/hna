@@ -29,8 +29,12 @@ public class TestPersistence {
             User u = createUsers("Jason Bourne");
             Role r = createRoles("Spy");
             
+//            User uu = createUsers("Aaron Cross");
+//            Role rr = createRoles("Recon");
+            
             Set role = new HashSet();
             role.add(r);
+//            role.add(rr);
             
             assigningRoleToUser(role, u);
             
