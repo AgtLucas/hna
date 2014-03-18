@@ -103,4 +103,85 @@ public class TestPersistence {
         
     }
     
+    // Show all UserRole
+    private static void showAllUserRole(User user) {
+        
+        System.out.println("Users and roles: ");
+        Set ur = user.getRole();
+        
+        Role role;
+        
+        for (Object u: ur) {
+            role = (Role) u;
+            System.out.println(role);
+        }
+        
+    }
+    
+    // Find user
+    private static void findUser(Role role) throws Exception {
+        
+        System.out.println("Users with role " + role.getName());
+        
+        RoleDAO rd = new RoleDAO();
+        
+        Set ur = rd.findUser(role);
+        
+        User o;
+        
+        for (Object u: ur) {
+            o = (User) u;
+            System.out.println(o);
+        }
+        
+    }
+    
+    // Remove role
+    private static void removeRole(Role role, User user) throws Exception {
+        
+        System.out.println("Removing roles...");
+        UserDAO ud = new UserDAO();
+        ud.removeRole(user, role);
+        
+    }
+    
+    // Has role
+    private static boolean hasRole(User user, Role role) throws Exception {
+        
+        System.out.println("Checking roles...");
+        UserDAO ud = new UserDAO();
+        return ud.hasRole(user, role);
+        
+    }
+    
+    // Find roles
+    private static void findRoles(User user) throws Exception {
+        
+        UserDAO ud = new UserDAO();
+        Set role = ud.findRole(user);
+        Role o;
+        
+        for (Object u: role) {
+            o = (Role) u;
+            System.out.println(o);
+        }
+        
+    }
+    
+    // Removing users
+    private static void removeAllUsers() throws Exception {
+        
+        UserDAO ud = new UserDAO();
+        ud.removeAll();
+        
+    }
+    
+    // Removing roles
+    private static void removeAllRoles() throws Exception {
+        
+        RoleDAO rd = new RoleDAO();
+        rd.removeAll();
+        
+    }
+    
 }
